@@ -1,0 +1,22 @@
+ :root{--background:#f6f7f2;--foreground:#233d36;--muted:#eef1e9;--muted-foreground:#627267;--border:#d5ddd2;--primary:#2b6551;--primary-foreground:#fff;--viz-series-1:#2773b8;--viz-series-2:#b34f23;--viz-series-3:#9250a1;--viz-series-4:#167b62;--viz-series-5:#c13458}*{box-sizing:border-box}body{margin:0;padding:16px;font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;color:var(--foreground);background:var(--background)}h3{font-size:18px;font-weight:500}.viz-row,.viz-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.form-label{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.btn,.form-select{font:inherit;padding:7px 10px;border:1px solid var(--border);background:var(--background);border-radius:6px;color:inherit;max-width:100%}.btn{cursor:pointer}.btn-ghost{border-color:transparent;background:transparent;white-space:normal}.btn[aria-pressed=true]{background:var(--primary);color:var(--primary-foreground)}.text-small{font-size:12px}.text-muted{color:var(--muted-foreground)}a{color:#205f86;overflow-wrap:anywhere}
+  #wenzhou-trip-map { width:100%; color:var(--foreground); }
+  #wenzhou-trip-map .trip-heading { justify-content:space-between; padding-right:90px; }
+  #wenzhou-trip-map .trip-heading h3 { margin:0 0 12px; }
+  #wenzhou-trip-map .trip-map-wrap { width:100%; margin-top:12px; }
+  #wenzhou-trip-map #wz-map-svg { width:100%; display:block; background:var(--muted); touch-action:pan-y; }
+  #wenzhou-trip-map .trip-map-label { font-size:12px; font-weight:500; fill:var(--foreground); paint-order:stroke; stroke:var(--background); stroke-width:4px; stroke-linejoin:round; }
+  #wenzhou-trip-map .trip-number { font-size:12px; font-weight:500; fill:var(--background); text-anchor:middle; dominant-baseline:central; }
+  #wenzhou-trip-map .trip-legend { margin-top:10px; gap:14px; }
+  #wenzhou-trip-map .trip-legend-item { display:inline-flex; align-items:center; gap:6px; }
+  #wenzhou-trip-map .trip-swatch { display:inline-block; width:22px; height:3px; }
+  #wenzhou-trip-map .trip-attribution { margin-top:8px; }
+  #wenzhou-trip-map .trip-detail { margin-top:14px; }
+  #wenzhou-trip-map #wz-day-title { font-weight:500; }
+  #wenzhou-trip-map #wz-day-note { margin-top:5px; }
+  #wenzhou-trip-map #wz-stops { margin-top:10px; gap:6px; }
+  #wenzhou-trip-map #wz-point-detail { margin-top:10px; }
+  #wenzhou-trip-map .trip-point-title { font-weight:500; margin-bottom:4px; }
+  #wenzhou-trip-map .trip-point-links { margin-top:6px; display:flex; flex-wrap:wrap; gap:14px; }
+  #wenzhou-trip-map .trip-map-scale { font-size:12px; fill:var(--foreground); paint-order:stroke; stroke:var(--background); stroke-width:4px; }
+  #wenzhou-trip-map .trip-tile { filter:var(--wz-map-filter,none); }
+  @media (max-width:480px) { #wenzhou-trip-map .trip-legend { gap:8px 12px; } }

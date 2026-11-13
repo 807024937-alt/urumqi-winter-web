@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 
 const directory=fileURLToPath(new URL('./public/',import.meta.url));
-const assets=new Map([['/',['index.html','text/html; charset=utf-8']],['/index.html',['index.html','text/html; charset=utf-8']],['/app.js',['app.js','text/javascript; charset=utf-8']],['/style.css',['style.css','text/css; charset=utf-8']]]);
+const assets=new Map([['/',['index.html','text/html; charset=utf-8']],['/index.html',['index.html','text/html; charset=utf-8']],['/app.js',['app.js','text/javascript; charset=utf-8']],['/style.css',['style.css','text/css; charset=utf-8']],['/wenzhou-map.html',['wenzhou-map.html','text/html; charset=utf-8']],['/wenzhou-map.css',['wenzhou-map.css','text/css; charset=utf-8']],['/wenzhou-map.js',['wenzhou-map.js','text/javascript; charset=utf-8']],['/vendor-d3.js',['vendor-d3.js','text/javascript; charset=utf-8']]]);
 const common={'X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'",'Permissions-Policy':'camera=(), microphone=(), geolocation=()'};
 function json(res,status,value){res.writeHead(status,{...common,'Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify(value));}
 function validateSource(origin){const u=new URL(origin);if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash||u.pathname!=='/')throw Error('SOURCE_ORIGIN must be an HTTPS origin without credentials or path');return u.origin;}
@@ -29,7 +29,7 @@ export function createHandler({origin,token,manageUrl,fetcher=fetch,now=Date.now
    }catch{return json(res,503,{error:'暂时无法读取行程，请稍后刷新。'})}
   }
   const asset=assets.get(pathname);if(!asset)return json(res,404,{error:'页面不存在'});
-  try{const bytes=await readFile(directory+asset[0]);res.writeHead(200,{...common,'Content-Type':asset[1],'Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:bytes);}catch{return json(res,503,{error:'页面正在更新，请稍后再试。'})}
+  try{const bytes=await readFile(directory+asset[0]);const headers={...common,'Content-Type':asset[1],'Cache-Control':'no-cache'};if(pathname==='/wenzhou-map.html'){headers['X-Frame-Options']='SAMEORIGIN';headers['Content-Security-Policy']=common['Content-Security-Policy'].replace("frame-ancestors 'none'","frame-ancestors 'self'");}res.writeHead(200,headers);res.end(req.method==='HEAD'?undefined:bytes);}catch{return json(res,503,{error:'页面正在更新，请稍后再试。'})}
  };
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
